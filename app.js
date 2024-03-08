@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 //Cargar rutas
 const hello_routes = require("./routes/hello");
 const create_routes = require("./routes/product");
+const list_route = require("./routes/productList");
 
 
 // Configurar el motor de plantillas Pug
@@ -24,6 +25,8 @@ try {
   app.use('/api/hello', hello_routes);
 
   app.use('/api/create', create_routes);
+
+  app.use('/api/list', list_route);
 
   // Manejo de errores 404
   app.use((req, res) => {
