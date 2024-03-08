@@ -6,8 +6,9 @@ const bodyParser = require('body-parser');
 
 //Cargar rutas
 const hello_routes = require("./routes/hello");
-const create_routes = require("./routes/product");
+const create_routes = require("./routes/productCreate");
 const list_route = require("./routes/productList");
+const delete_route = require("./routes/productDelete");
 
 // Indica a Express que sirva los archivos estáticos desde la carpeta "public"
 app.use(express.static('public'));
@@ -29,6 +30,9 @@ try {
   app.use('/api/create', create_routes);
 
   app.use('/api/list', list_route);
+
+  // Usa el enrutador para la ruta de eliminación
+  app.use('/api/delete', delete_route);
 
   // Manejo de errores 404
   app.use((req, res) => {

@@ -4,6 +4,7 @@ async function listarProductos(req, res) {
     try {
         // Obtener todos los productos de la base de datos
         const productos = await Product.find();
+       
 
         res.status(200).json({ products: productos });
     } catch (error) {
