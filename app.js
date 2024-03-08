@@ -9,6 +9,8 @@ const hello_routes = require("./routes/hello");
 const create_routes = require("./routes/product");
 const list_route = require("./routes/productList");
 
+// Indica a Express que sirva los archivos estáticos desde la carpeta "public"
+app.use(express.static('public'));
 
 // Configurar el motor de plantillas Pug
 app.set('view engine', 'pug');
