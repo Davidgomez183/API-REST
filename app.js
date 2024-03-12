@@ -1,7 +1,11 @@
 const express = require('express');
+// Servidor con express
 const app = express();
+// Puerto de eschucha
 const port = 3000;
+// MongoDB
 const mongoose = require('mongoose');
+// Para leer datos del cuerpo
 const bodyParser = require('body-parser');
 
 //Cargar rutas
@@ -9,18 +13,18 @@ const hello_routes = require("./routes/hello");
 const create_routes = require("./routes/productCreate");
 const list_route = require("./routes/productList");
 const delete_route = require("./routes/productDelete");
-
+const update_route = require("./routes/productUpdate");
 // Indica a Express que sirva los archivos estáticos desde la carpeta "public"
 app.use(express.static('public'));
 
 // Configurar el motor de plantillas Pug
 app.set('view engine', 'pug');
+// Directorio donde estaran las vistas views
 app.set('views', __dirname + '/views'); // Establecer el directorio de las plantillas de vistas
 
 // Configuración del middleware body-parser para analizar el cuerpo de las solicitudes en formato JSON
-//mongodb://127.0.0.1:27017/db_name
 app.use(bodyParser.json());
-//Conectar a la base de datos
+//Conectar a la base de datos //mongodb://127.0.0.1:27017/db_name
 try {
   mongoose.connect('mongodb://127.0.0.1:27017/producte');
   console.log('La conexión a la base de datos funciona');
@@ -33,6 +37,8 @@ try {
 
   // Usa el enrutador para la ruta de eliminación
   app.use('/api/delete', delete_route);
+
+  app.use('/api/update', update_route);
 
   // Manejo de errores 404
   app.use((req, res) => {

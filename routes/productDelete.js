@@ -6,3 +6,4 @@ const DeleteProductController = require('../controllers/productDeleteController'
 Router.delete('/:productId', DeleteProductController.ProductDelete);
 
 module.exports = Router;
+
