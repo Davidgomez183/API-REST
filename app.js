@@ -15,6 +15,7 @@ const list_route = require("./routes/productList");
 const delete_route = require("./routes/productDelete");
 const update_route = require("./routes/productUpdate");
 const getProduct_route = require("./routes/productGet");
+const productSearch_route = require("./routes/productSearch");
 // Indica a Express que sirva los archivos estáticos desde la carpeta "public"
 app.use(express.static('public'));
 
@@ -42,7 +43,9 @@ try {
   app.use('/api/update', update_route);
 
   app.use('/api/get', getProduct_route);
-
+  
+  app.use('/api/search', productSearch_route); 
+  
   // Manejo de errores 404
   app.use((req, res) => {
     res.status(404).render('error', { texto: 'ERROR 404: Página no encontrada' });
