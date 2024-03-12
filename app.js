@@ -14,6 +14,7 @@ const create_routes = require("./routes/productCreate");
 const list_route = require("./routes/productList");
 const delete_route = require("./routes/productDelete");
 const update_route = require("./routes/productUpdate");
+const getProduct_route = require("./routes/productGet");
 // Indica a Express que sirva los archivos estáticos desde la carpeta "public"
 app.use(express.static('public'));
 
@@ -39,6 +40,8 @@ try {
   app.use('/api/delete', delete_route);
 
   app.use('/api/update', update_route);
+
+  app.use('/api/get', getProduct_route);
 
   // Manejo de errores 404
   app.use((req, res) => {
