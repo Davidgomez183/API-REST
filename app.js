@@ -8,6 +8,9 @@ const mongoose = require('mongoose');
 // Para leer datos del cuerpo
 const bodyParser = require('body-parser');
 
+// Importar el middleware de autenticación
+const { authenticateToken } = require('./authentication');
+
 //Cargar rutas
 const hello_routes = require("./routes/hello");
 const create_routes = require("./routes/productCreate");
@@ -31,6 +34,8 @@ try {
   mongoose.connect('mongodb://127.0.0.1:27017/producte');
   console.log('La conexión a la base de datos funciona');
 
+
+ 
   app.use('/api/hello', hello_routes);
 
   app.use('/api/create', create_routes);
@@ -38,13 +43,15 @@ try {
   app.use('/api/list', list_route);
 
   // Usa el enrutador para la ruta de eliminación
-  app.use('/api/delete', delete_route);
+  app.use('/api/delete', authenticateToken, delete_route);
 
-  app.use('/api/update', update_route);
+  app.use('/api/update', authenticateToken, update_route);
 
   app.use('/api/get', getProduct_route);
   
   app.use('/api/search', productSearch_route); 
+
+  
   
   // Manejo de errores 404
   app.use((req, res) => {
